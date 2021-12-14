@@ -1,1 +1,1 @@
-# seamsFriendlyScrapinng
+# seamsFriendlyScraping
