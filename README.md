@@ -4,7 +4,7 @@ Setting up project on your local machine is really easy. You can setup this proj
 
 1. Get the source code on to your machine via git.
 
-    ```https://github.com/subhamyadav580/seamsFriendlyScraping.git```
+    ```git clone https://github.com/subhamyadav580/seamsFriendlyScraping.git```
 
 
 2. Now change the directory.
