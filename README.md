@@ -21,7 +21,7 @@ Setting up project on your local machine is really easy. You can setup this proj
 
 5. Now change the directory into project directory.
 
-    ```cd seamsFriendlyScraping```
+    ```cd seamsfriendlyScraping```
 
 6. Now execute the code and scrap the website.
 
