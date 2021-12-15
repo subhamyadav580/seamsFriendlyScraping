@@ -4,9 +4,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options;
 from selenium.common.exceptions import NoSuchElementException        
 import os
+from ..items import SeamsfriendlyscrapingItem
+
 
 class ShortSpider(scrapy.Spider):
     name = 'seamsFriendlySpider'
+
 
     def start_requests(self):
         self.options = Options()
@@ -37,12 +40,17 @@ class ShortSpider(scrapy.Spider):
         return True
         
     def parse(self, response, **kwargs):
-        title = response.css('title::text').extract_first()
-        des = response.css('#shopify-section-collection-template a::text').extract()
-        prices = response.css('#shopify-section-collection-template .Text--subdued::text').extract()
-        yield {
-            'URL' : response,
-            'title_text' : title,
-            'description' : des,
-            'Prices' : prices
-        }
+        items = SeamsfriendlyscrapingItem()
+        blocks = response.xpath('/html/body/div[6]/main/div[1]/section/div[3]/div[2]/div[2]/div[2]/div/div')
+        for block in blocks:
+            label = block.css('div div div.label_icon::text').extract()
+            img = block.css('img').xpath('@src').extract()
+            desc = block.css('h2 a::text').extract()
+            images = [f"https:{im}" for im in img]
+            prices = block.css('div div div div span.ProductItem__Price::text').extract()
+            items['Label'] = label
+            items['Images'] = images
+            items['Description'] = desc
+            items['Prices'] = prices
+            yield items
+
